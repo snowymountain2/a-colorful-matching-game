@@ -24,21 +24,43 @@
   margin-top: 15px;
 }
 
-.radio {
+.radio-input {
   display: none;
 }
 
-.mode-selection-btn {
+button {
+  outline: 0;
   padding: 5px 10px;
-  background-color: red;
-  color: white;
-  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  vertical-align: middle;
+  border: 1px solid;
+  border-radius: 2px;
+  color: black;
+  background-color: #;
+  border-color: #1b1f2326;
 }
 
-#easy:checked ~ .label-1,
-#medium:checked ~ .label-2,
-#hard:checked ~ .label-3 {
-  background-color: orange;
+.mode-selection-btn {
+  cursor: pointer;
+  outline: 0;
+  padding: 5px 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  vertical-align: middle;
+  border: 1px solid;
+  border-radius: 14px;
+  color: black;
+  background-color: white;
+  border-color: #1b1f2326;
+}
+
+.radio-input:checked + .mode-selection-btn {
+  background-color: #0095ff;
 }
 
 .time {

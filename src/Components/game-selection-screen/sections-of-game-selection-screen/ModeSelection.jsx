@@ -6,7 +6,6 @@ export default function ModeSelection({
 
   function handleOnChange(e) {
     gameModeRegular = e.target.value;
-    //console.log(gameModeRegular);
   }
 
   function handleStartBtnClick() {
@@ -32,34 +31,39 @@ export default function ModeSelection({
       <div className="mode-selection main-content">
         <br></br>
 
-        <div>
-          <form>
-            <input
-              type="radio"
-              id="easy"
-              value="easy"
-              onChange={handleOnChange}
-              className="radio"
-            ></input>
-            <label className="mode-selection-btn label-1">Easy</label>
-            <input
-              type="radio"
-              id="medium"
-              value="medium"
-              onChange={handleOnChange}
-              className="radio"
-            ></input>
-            <label className="mode-selection-btn label-2">Medium</label>
-            <input
-              type="radio"
-              id="hard"
-              value="hard"
-              onChange={handleOnChange}
-              className="radio"
-            ></input>
-            <label className="mode-selection-btn label-3">Hard</label>
-          </form>
-        </div>
+        <input
+          type="radio"
+          id="easy"
+          name="mode"
+          value="easy"
+          onChange={handleOnChange}
+          className="radio-input"
+        ></input>
+        <label className="mode-selection-btn label-1" htmlFor="easy">
+          Easy
+        </label>
+        <input
+          type="radio"
+          id="medium"
+          name="mode"
+          value="medium"
+          onChange={handleOnChange}
+          className="radio-input"
+        ></input>
+        <label className="mode-selection-btn label-2" htmlFor="medium">
+          Medium
+        </label>
+        <input
+          type="radio"
+          id="hard"
+          name="mode"
+          value="hard"
+          onChange={handleOnChange}
+          className="radio-input"
+        ></input>
+        <label className="mode-selection-btn label-3" htmlFor="hard">
+          Hard
+        </label>
       </div>
       <div className="start-btn-class main-content">
         <button onClick={handleStartBtnClick}>Start</button>

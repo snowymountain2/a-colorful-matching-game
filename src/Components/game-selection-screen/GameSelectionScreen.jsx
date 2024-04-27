@@ -23,7 +23,7 @@ export default function GameSelectionScreen({
             <u>How to Play:</u> Tap each pair of matching colored tiles as
             quickly as possible. The quicker you match all 16 tiles the higher
             your score. The game’s difficulty increases in each mode by showing
-            tiles with a narrower color spectrum
+            tiles with fewer colors
           </p>
         </div>
       </div>
