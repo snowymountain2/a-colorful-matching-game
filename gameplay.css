@@ -1,6 +1,9 @@
 /* #root {
   font-family: "lato";
 } */
+body {
+  background-color: black;
+}
 
 .start-screen-container-around-tiles {
   display: flex;
@@ -186,6 +189,7 @@ button {
 .grid-container-highscores {
   display: flex;
   flex-direction: column;
+  row-gap: 30px;
   width: 50%;
 }
 
@@ -253,6 +257,16 @@ p {
   justify-content: center;
   margin-right: 30%;
   margin-left: 30%;
+}
+
+.high-score-list h1 {
+  margin-top: 0px;
+}
+
+@media (max-width: 845px) {
+  .high-score-list h1 {
+    margin-top: 30px !important;
+  }
 }
 
 .start-btn-class {
