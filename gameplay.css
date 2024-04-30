@@ -168,7 +168,7 @@ button {
 }
 
 .grid-container-highscores {
-  flex: 2;
+  flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;

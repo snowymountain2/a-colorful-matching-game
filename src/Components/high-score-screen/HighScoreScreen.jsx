@@ -118,7 +118,7 @@ export default function HighScoreScreen({
         <div className="grid-container-highscores">
           <div className="end-game-message">
             {" "}
-            {newHighScore ? "new fdsfsfs score!" : "Your Score:"}
+            {newHighScore ? "new highscore!" : "Your Score:"}
             <p>{time}</p>
             <p>{highscoreRanks[positionOfNewHighScore]}</p>
             <RestartGame
