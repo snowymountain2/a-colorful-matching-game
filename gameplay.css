@@ -99,7 +99,6 @@ button {
 .end-game-message {
   width: 100%;
   color: white;
-  background-color: gray;
   text-align: center;
   font-size: 1.8rem;
   text-transform: uppercase;
@@ -109,11 +108,15 @@ button {
 }
 
 .high-score-list-container {
+  display: flex;
   width: 50%;
+  justify-content: center;
+  align-items: center;
 }
 
 .high-score-list {
-  width: 100%;
+  width: 330px;
+  align-items: center;
 }
 
 @media (max-width: 845px) {
@@ -133,11 +136,12 @@ button {
 .submithighscore input {
   border-color: black;
   color: white;
+  text-align: center;
   background-color: black;
   border-top: none;
   border-left: none;
   border-right: none;
-  width: 190px;
+  width: 240px;
 }
 
 .submithighscore input[type="text"] {
@@ -156,16 +160,20 @@ button {
   grid-row: 1 / 5;
   align-self: center;
   height: 500px;
-  background-color: gray;
   text-align: center;
+}
+
+.parent-high-score-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .container-around-high-score {
   display: flex;
-  justify-content: center;
-  position: relative;
-  margin-left: 15%;
-  margin-right: 15%;
+  justify-items: center;
+  width: 800px;
   column-gap: 30px;
 }
 
@@ -181,6 +189,13 @@ button {
 }
 
 .highscore-items {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.highscore-item-titles {
+  margin-right: 29px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -394,17 +409,11 @@ p {
 }
 
 .border {
-  /* border-color: orange; */
-  /* border: 10px solid orange; */
-  /* box-shadow: 0px 0px 5px 5px darkslategray; */
   outline: 7px double white;
 }
 
 @media (max-width: 840px) {
   .border {
-    /* border-color: orange; */
-    /* border: 10px solid orange; */
-    /* box-shadow: 0px 0px 5px 5px darkslategray; */
     outline: 4px double white;
   }
 }

@@ -40,14 +40,15 @@ export default function SubmitHighScore({
   }
   return (
     <>
-      <div className={className}>
+      <div className="submithighscore">
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             value={unsubmittedNameInForm}
             onKeyDown={handleChange}
           />
-          <input type="submit" value="submit" />
+          {"\n"}
+          <input type="submit" value="SUBMIT" />
         </form>
       </div>
     </>

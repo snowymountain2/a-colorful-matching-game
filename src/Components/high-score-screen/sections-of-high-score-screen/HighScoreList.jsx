@@ -55,7 +55,7 @@ export default function HighScoreList({
         <h1>High Scores:</h1>
         {/* <p>{countries[0].name}</p> */}
         <div className="container-around-highscore-text">
-          <p className="highscore-items">
+          <p className="highscore-item-titles">
             <span>Rank</span> <span>Score</span>
             <span>Name</span>
             <span>Date</span>
