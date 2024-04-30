@@ -94,15 +94,29 @@ button {
 }
 
 .end-game-message {
+  width: 100%;
   color: white;
-  grid-column: 1 / 2;
-  grid-row: 1 / 1;
-  align-self: center;
   background-color: gray;
   text-align: center;
   font-size: 1.8rem;
   text-transform: uppercase;
-  margin-top: 60px;
+}
+.submit-name {
+  width: 100%;
+}
+
+.high-score-list-container {
+  width: 50%;
+}
+
+.high-score-list {
+  width: 100%;
+}
+
+@media (max-width: 845px) {
+  .high-score-list-container {
+    width: 100%;
+  }
 }
 
 .submithighscore {
@@ -149,15 +163,17 @@ button {
   position: relative;
   margin-left: 15%;
   margin-right: 15%;
+  column-gap: 30px;
 }
 
 @media (max-width: 845px) {
   .container-around-high-score {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     position: relative;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
   }
 }
 
@@ -168,26 +184,16 @@ button {
 }
 
 .grid-container-highscores {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-gap: 15px;
-  height: 70vh;
-  width: 80vw;
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 @media (max-width: 845px) {
   .grid-container-highscores {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-gap: 30px;
-    height: 70vh;
-    width: 80vw;
-    align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 }
 

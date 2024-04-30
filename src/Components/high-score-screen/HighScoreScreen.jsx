@@ -138,37 +138,41 @@ export default function HighScoreScreen({
               setEndOfGameRestartBtnClick={setEndOfGameRestartBtnClick}
             />
           </div>
-
-          {newHighScore ? (
-            <SubmitHighScore
-              className={"submithighscore"}
+          <div className="submit-name">
+            {newHighScore ? (
+              <SubmitHighScore
+                className={"submithighscore"}
+                setSubmittedNameInForm={setSubmittedNameInForm}
+                submittedNameInForm={submittedNameInForm}
+                wasNameinFormSubmitted={wasNameinFormSubmitted}
+                setWasNameinFormSubmitted={setWasNameinFormSubmitted}
+              />
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+        <div className="high-score-list-container">
+          <div className="high-score-list">
+            <HighScoreList
+              className={"highscorelist"}
+              listOfHighScores={listOfHighScores}
               setSubmittedNameInForm={setSubmittedNameInForm}
               submittedNameInForm={submittedNameInForm}
               wasNameinFormSubmitted={wasNameinFormSubmitted}
               setWasNameinFormSubmitted={setWasNameinFormSubmitted}
+              timeUnformatted={timeUnformatted}
+              highscoreSubmitted={highscoreSubmitted}
+              dataset={dataset}
+              newHighScore={newHighScore}
+              setListOfHighScores={setListOfHighScores}
+              highScoreListRenderStatus={highScoreListRenderStatus}
+              setHighScoreListRenderStatus={setHighScoreListRenderStatus}
+              positionOfNewHighScore={positionOfNewHighScore}
+              setPositionOfNewHighScore={setPositionOfNewHighScore}
+              highscoreRanks={highscoreRanks}
             />
-          ) : (
-            ""
-          )}
-
-          <HighScoreList
-            className={"highscorelist"}
-            listOfHighScores={listOfHighScores}
-            setSubmittedNameInForm={setSubmittedNameInForm}
-            submittedNameInForm={submittedNameInForm}
-            wasNameinFormSubmitted={wasNameinFormSubmitted}
-            setWasNameinFormSubmitted={setWasNameinFormSubmitted}
-            timeUnformatted={timeUnformatted}
-            highscoreSubmitted={highscoreSubmitted}
-            dataset={dataset}
-            newHighScore={newHighScore}
-            setListOfHighScores={setListOfHighScores}
-            highScoreListRenderStatus={highScoreListRenderStatus}
-            setHighScoreListRenderStatus={setHighScoreListRenderStatus}
-            positionOfNewHighScore={positionOfNewHighScore}
-            setPositionOfNewHighScore={setPositionOfNewHighScore}
-            highscoreRanks={highscoreRanks}
-          />
+          </div>
         </div>
       </div>
     </>
