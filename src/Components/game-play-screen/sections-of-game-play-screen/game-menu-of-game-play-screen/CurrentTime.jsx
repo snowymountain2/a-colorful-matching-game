@@ -1,3 +1,9 @@
 export default function CurrentTime({ time }) {
-  return <span className="time">Current Time: {time}</span>;
+  return (
+    <>
+      <div className="time">
+        <p>CURRENT TIME</p> <p>{time}</p>
+      </div>
+    </>
+  );
 }

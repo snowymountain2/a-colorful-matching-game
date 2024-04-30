@@ -40,7 +40,7 @@ export default function ModeSelection({
           className="radio-input"
         ></input>
         <label className="mode-selection-btn label-1" htmlFor="easy">
-          Easy
+          EASY
         </label>
         <input
           type="radio"
@@ -51,7 +51,7 @@ export default function ModeSelection({
           className="radio-input"
         ></input>
         <label className="mode-selection-btn label-2" htmlFor="medium">
-          Medium
+          MEDIUM
         </label>
         <input
           type="radio"
@@ -62,11 +62,11 @@ export default function ModeSelection({
           className="radio-input"
         ></input>
         <label className="mode-selection-btn label-3" htmlFor="hard">
-          Hard
+          HARD
         </label>
       </div>
       <div className="start-btn-class main-content">
-        <button onClick={handleStartBtnClick}>Start</button>
+        <button onClick={handleStartBtnClick}>START</button>
       </div>
     </>
   );

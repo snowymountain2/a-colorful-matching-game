@@ -32,10 +32,6 @@ export default function HighScoreList({
     }
   }, [listOfHighScores, highScoreListRenderStatus, newHighScore]);
 
-  console.log(
-    "test",
-    listOfHighScores.some((value) => timeUnformatted < value.msScore)
-  );
   function findPositionOfNewHighScore(highscorelist) {
     if (highscorelist.length === 0) {
       setPositionOfNewHighScore(0);

@@ -118,7 +118,7 @@ export default function HighScoreScreen({
         <div className="grid-container-highscores">
           <div className="end-game-message">
             {" "}
-            {newHighScore ? "new high score!" : "Your Score:"}
+            {newHighScore ? "new fdsfsfs score!" : "Your Score:"}
             <p>{time}</p>
             <p>{highscoreRanks[positionOfNewHighScore]}</p>
             <RestartGame
@@ -138,6 +138,7 @@ export default function HighScoreScreen({
               setEndOfGameRestartBtnClick={setEndOfGameRestartBtnClick}
             />
           </div>
+
           {newHighScore ? (
             <SubmitHighScore
               className={"submithighscore"}
@@ -149,6 +150,7 @@ export default function HighScoreScreen({
           ) : (
             ""
           )}
+
           <HighScoreList
             className={"highscorelist"}
             listOfHighScores={listOfHighScores}

@@ -221,7 +221,7 @@ export default function GamePlayScreen({
       </div>
       <div className="menu">
         <span>
-          <button onClick={handleRestartButtonClicked}>Restart</button>
+          <button onClick={handleRestartButtonClicked}>RESTART</button>
         </span>
         <span> </span>
         <HighScore highScorePostedOnGameplay={highScorePostedOnGameplay} />
