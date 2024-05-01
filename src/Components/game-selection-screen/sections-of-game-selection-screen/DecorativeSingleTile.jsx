@@ -1,8 +1,10 @@
-export default function DecorativeSingleTile({ keys, className, tileColor }) {
-  const randomNumber = Math.floor(Math.random() * 6);
-
+export default function DecorativeSingleTile({
+  key,
+  uniqueTileID,
+  className,
+  tileColor,
+}) {
   function randomIntFromInterval(min, max) {
-    // min and max included
     return Math.random() * (max - min) + min;
   }
 
@@ -12,8 +14,9 @@ export default function DecorativeSingleTile({ keys, className, tileColor }) {
       style={{
         backgroundColor: `${tileColor}`,
         opacity: 0.25,
+        // rotation direction inverses every other tile
         animation: `${
-          keys % 2 === 0
+          uniqueTileID % 2 === 0
             ? `rotation ${randomIntFromInterval(4, 25)}s infinite linear`
             : `rotation-reverse ${randomIntFromInterval(
                 4,

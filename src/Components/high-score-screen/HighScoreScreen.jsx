@@ -142,7 +142,6 @@ export default function HighScoreScreen({
             <div className="submit-name">
               {newHighScore ? (
                 <SubmitHighScore
-                  className={"submithighscore"}
                   setSubmittedNameInForm={setSubmittedNameInForm}
                   submittedNameInForm={submittedNameInForm}
                   wasNameinFormSubmitted={wasNameinFormSubmitted}
@@ -156,7 +155,6 @@ export default function HighScoreScreen({
           <div className="high-score-list-container">
             <div className="high-score-list">
               <HighScoreList
-                className={"highscorelist"}
                 listOfHighScores={listOfHighScores}
                 setSubmittedNameInForm={setSubmittedNameInForm}
                 submittedNameInForm={submittedNameInForm}

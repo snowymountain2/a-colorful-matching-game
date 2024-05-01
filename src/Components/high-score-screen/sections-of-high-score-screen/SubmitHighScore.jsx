@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export default function SubmitHighScore({
-  className,
   setSubmittedNameInForm,
   submittedNameInForm,
   setWasNameinFormSubmitted,

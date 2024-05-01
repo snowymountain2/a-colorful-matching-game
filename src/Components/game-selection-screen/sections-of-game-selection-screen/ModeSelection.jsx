@@ -2,25 +2,21 @@ export default function ModeSelection({
   setGameSelectionValues,
   gameSelectionValues,
 }) {
-  let gameModeRegular = "";
+  let gameModeValue = "";
 
   function handleOnChange(e) {
-    gameModeRegular = e.target.value;
+    gameModeValue = e.target.value;
   }
 
   function handleStartBtnClick() {
-    if (gameModeRegular !== "") {
+    if (gameModeValue !== "") {
       setGameSelectionValues({
-        gameMode: gameModeRegular,
+        gameMode: gameModeValue,
         gameScreen: "gameplay",
         startBtnClicked: true,
       });
-    } else {
-      null;
     }
   }
-
-  // console.log(gameModeRegular);
   return (
     <>
       <div className="mode-selection-title main-content">

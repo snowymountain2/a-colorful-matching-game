@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 export default function HighScoreList({
-  className,
   listOfHighScores,
   setSubmittedNameInForm,
   submittedNameInForm,
@@ -51,7 +50,7 @@ export default function HighScoreList({
 
   return (
     <>
-      <div className={className}>
+      <div className="highscorelist">
         <h1>High Scores:</h1>
         {/* <p>{countries[0].name}</p> */}
         <div className="container-around-highscore-text">
