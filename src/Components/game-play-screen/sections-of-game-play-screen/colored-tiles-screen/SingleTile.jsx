@@ -16,7 +16,7 @@ export default function SingleTile({
 }) {
   const [tileMatched, setTileMatched] = useState(false);
 
-  // logic to check if these are the matched tiles that need to be hidden
+  // logic to check if these are the matched tiles that need to be hiddendfdf
   if (
     match === true &&
     (tileIDClickedHistory.at(-1) === keys ||
