@@ -3,24 +3,24 @@ import { useState, useEffect } from "react";
 export default function SingleTile({
   className,
   onClick,
-  tileID,
+  uniqueTileID,
   keys,
-  setTileID,
+  setUniqueTileID,
   tileColor,
-  colorValue,
-  setColorValue,
-  setTileIDClickedHistory,
-  tileIDClickedHistory,
-  match,
+  colorValuesOfTwoTilesCheckedForMatch,
+  setColorValuesOfTwoTilesCheckedForMatch,
+  setUniqueTileIDClickedHistory,
+  uniqueTileIDClickedHistory,
+  ismatch,
   restartButtonClick,
 }) {
   const [tileMatched, setTileMatched] = useState(false);
 
   // logic to check if these are the matched tiles that need to be hidden
   if (
-    match === true &&
-    (tileIDClickedHistory.at(-1) === keys ||
-      tileIDClickedHistory.at(-2) === keys) &&
+    ismatch === true &&
+    (uniqueTileIDClickedHistory.at(-1) === keys ||
+      uniqueTileIDClickedHistory.at(-2) === keys) &&
     tileMatched == false &&
     restartButtonClick !== true
   ) {
@@ -28,10 +28,13 @@ export default function SingleTile({
   }
 
   function example() {
-    if (tileID.length <= 1 && tileID[0] !== keys) {
-      setTileID([...tileID, keys]);
-      setColorValue([...colorValue, tileColor]);
-      setTileIDClickedHistory([...tileIDClickedHistory, keys]);
+    if (uniqueTileID.length <= 1 && uniqueTileID[0] !== keys) {
+      setUniqueTileID([...uniqueTileID, keys]);
+      setColorValuesOfTwoTilesCheckedForMatch([
+        ...colorValuesOfTwoTilesCheckedForMatch,
+        tileColor,
+      ]);
+      setUniqueTileIDClickedHistory([...uniqueTileIDClickedHistory, keys]);
     }
   }
 
@@ -48,7 +51,9 @@ export default function SingleTile({
     <div
       className={
         className +
-        (tileID.length <= 1 && tileID[0] === keys ? " border" : "") +
+        (uniqueTileID.length <= 1 && uniqueTileID[0] === keys
+          ? " border"
+          : "") +
         (tileMatched ? " hidden" : "")
       }
       onClick={example}
