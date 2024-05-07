@@ -1,8 +1,6 @@
 import SingleTile from "./sections-of-game-play-screen/colored-tiles-screen/SingleTile";
-import TileGrid from "./sections-of-game-play-screen/colored-tiles-screen/TileGrid";
 import CurrentTime from "./sections-of-game-play-screen/game-menu-of-game-play-screen/CurrentTime";
 import HighScore from "./sections-of-game-play-screen/game-menu-of-game-play-screen/HighScore";
-import RestartGame from "../high-score-screen/sections-of-high-score-screen/RestartGame";
 import "../../../gameplay.css";
 import logo from "../../../src/assets/title.png";
 import { useState, useEffect, useRef } from "react";
@@ -21,7 +19,10 @@ export default function GamePlayScreen({
   timeUnformatted,
   highScorePostedOnGameplay,
 }) {
-  const [uniqueTileID, setUniqueTileID] = useState([]);
+  const [
+    uniqueIDValuesOfTwoTilesCheckedForMatch,
+    setUniqueIDValuesOfTwoTilesCheckedForMatch,
+  ] = useState([]);
   const [
     colorValuesOfTwoTilesCheckedForMatch,
     setColorValuesOfTwoTilesCheckedForMatch,
@@ -34,7 +35,6 @@ export default function GamePlayScreen({
   const startTime = useRef(null);
   const [restartButtonClick, setRestartButtonClick] = useState(false);
   const [startDate, setStartDate] = useState(0);
-  const [gameRestartedCount, setGameRestartedCount] = useState(0);
   const [individualTileColorCode, setIndividualTileColorCode] = useState([]);
 
   //randomize tiles logic
@@ -53,7 +53,7 @@ export default function GamePlayScreen({
     }
     return;
   }, [setGameSelectionValues, startBtnClicked, gameMode, restartButtonClick]);
-  //logic if 2 cards selected and DO match
+  //logic if 2 tiles selected and DO match
   if (
     colorValuesOfTwoTilesCheckedForMatch.length === 2 &&
     colorValuesOfTwoTilesCheckedForMatch[0] ===
@@ -61,16 +61,16 @@ export default function GamePlayScreen({
   ) {
     setIsMatch((ismatch) => !ismatch);
     changeMatchCount(matchCount + 1);
-    setUniqueTileID((prevValue) => []);
+    setUniqueIDValuesOfTwoTilesCheckedForMatch((prevValue) => []);
     setColorValuesOfTwoTilesCheckedForMatch((prevValue) => []);
   }
-  //logic if 2 cards selected and DONT match
+  //logic if 2 tiles selected and DONT match
   if (
     colorValuesOfTwoTilesCheckedForMatch.length === 2 &&
     colorValuesOfTwoTilesCheckedForMatch[0] !==
       colorValuesOfTwoTilesCheckedForMatch[1]
   ) {
-    setUniqueTileID((prevValue) => []);
+    setUniqueIDValuesOfTwoTilesCheckedForMatch((prevValue) => []);
     setColorValuesOfTwoTilesCheckedForMatch((prevValue) => []);
   }
   // resets ismatch state variable back to false after a match occured
@@ -78,27 +78,23 @@ export default function GamePlayScreen({
     setIsMatch(!ismatch);
   }
 
-  // resets start time variable upon restart button being clicked
+  // sets startDate variable when game loads for very first time
   useEffect(() => {
-    if (gameRestartedCount === 0) {
-      setStartDate((startDate) => Date.now());
-    }
-    return;
-  }, [gameRestartedCount]);
+    setStartDate((prevValue) => Date.now());
+  }, []);
 
   //stopwatch logic
   useEffect(() => {
     startTime.current = setInterval(() => {
       if (matchCount == 8) {
         clearInterval(startTime.current);
-        setUniqueTileID((prevState) => []);
+        setUniqueIDValuesOfTwoTilesCheckedForMatch((prevState) => []);
         setColorValuesOfTwoTilesCheckedForMatch((prevState) => []);
         setIsMatch(false);
         setUniqueTileIDClickedHistory((prevState) => []);
         changeMatchCount(0);
         setRestartButtonClick(false);
         setStartDate(0);
-        setGameRestartedCount(0);
         setIndividualTileColorCode((prevState) => []);
         startTime.current = null;
         setGameSelectionValues({
@@ -110,7 +106,6 @@ export default function GamePlayScreen({
       }
       let [formattedTimeString, msElapsedSinceStartOfStopwatch] =
         formatStopwatchTime(startDate);
-
       setTimeUnformatted(msElapsedSinceStartOfStopwatch);
       setTime(formattedTimeString);
     }, 100);
@@ -122,14 +117,12 @@ export default function GamePlayScreen({
   // changes that occur when restart button pressed
   useEffect(() => {
     if (restartButtonClick) {
-      setIsMatch((ismatch) => false);
-      changeMatchCount((matchCount) => 0);
-      setUniqueTileID((uniqueTileID) => []);
-      setColorValuesOfTwoTilesCheckedForMatch(
-        (colorValuesOfTwoTilesCheckedForMatch) => []
-      );
-      setRestartButtonClick((restartButtonClick) => false);
-      setStartDate((startDate) => Date.now());
+      setIsMatch((prevValue) => false);
+      changeMatchCount((prevValue) => 0);
+      setUniqueIDValuesOfTwoTilesCheckedForMatch((prevValue) => []);
+      setColorValuesOfTwoTilesCheckedForMatch((prevValue) => []);
+      setRestartButtonClick((prevValue) => false);
+      setStartDate((prevValue) => Date.now());
       setGameSelectionValues({
         gameMode: gameMode,
         gameScreen: "gameplay",
@@ -161,10 +154,14 @@ export default function GamePlayScreen({
           {[...Array(16)].map((e, i) => (
             <SingleTile
               key={i}
-              keys={i + 1}
+              uniqueTileID={i + 1}
               className={`item item-${i + 1}`}
-              uniqueTileID={uniqueTileID}
-              setUniqueTileID={setUniqueTileID}
+              uniqueIDValuesOfTwoTilesCheckedForMatch={
+                uniqueIDValuesOfTwoTilesCheckedForMatch
+              }
+              setUniqueIDValuesOfTwoTilesCheckedForMatch={
+                setUniqueIDValuesOfTwoTilesCheckedForMatch
+              }
               tileColor={`${individualTileColorCode[i]}`}
               colorValuesOfTwoTilesCheckedForMatch={
                 colorValuesOfTwoTilesCheckedForMatch
