@@ -7,6 +7,7 @@ import "../../../gameplay.css";
 import logo from "../../../src/assets/title.png";
 import { useState, useEffect, useRef } from "react";
 import { colorObject } from "./sections-of-game-play-screen/colored-tiles-screen/ColorObject.js";
+import { randomizeTileSequence } from "../../Helper-Functions/helpers.js";
 
 export default function GamePlayScreen({
   gameSelectionValues: { startBtnClicked, gameMode, gameScreen },
@@ -36,24 +37,7 @@ export default function GamePlayScreen({
   //randomize tiles logic
   useEffect(() => {
     if (startBtnClicked || restartButtonClick) {
-      let createRandomIndexInNewColorObject = Math.floor(Math.random() * 2);
-      let newColorArrayNotRandomized = [];
-      newColorArrayNotRandomized =
-        colorObject[`${gameMode}`][createRandomIndexInNewColorObject];
-      let randomArray = new Set([]);
-      randomArray = Array.from(randomArray);
-
-      while (randomArray.length < 16) {
-        let randomNumber = Math.floor(Math.random() * 16);
-        randomArray.push(randomNumber);
-        let placeHolderSet = new Set(randomArray);
-        randomArray = Array.from(placeHolderSet);
-      }
-
-      let cardColors = new Array(16).fill("");
-      let newCardColors = cardColors.map((currentelement, index) => {
-        return newColorArrayNotRandomized[randomArray[index]];
-      });
+      const newCardColors = randomizeTileSequence(gameMode, colorObject);
 
       setIndividualTileColorCode((prev) => [...newCardColors]);
 
@@ -66,13 +50,11 @@ export default function GamePlayScreen({
         startBtnClicked: false,
         gameScreen: "gameplay",
       });
-      //console.log(randomArray.length, "set");
-      //setStartBtnClicked((prevValue) => false);
     } else {
       null;
     }
   }, [setGameSelectionValues, startBtnClicked, gameMode, restartButtonClick]);
-  //logic if 2 cards selected and DO ismatch
+  //logic if 2 cards selected and DO match
   if (
     uniqueTileID.length === 2 &&
     uniqueTileID[0] !== uniqueTileID[1] &&
@@ -86,7 +68,7 @@ export default function GamePlayScreen({
       (colorValuesOfTwoTilesCheckedForMatch) => []
     );
   }
-  //logic if 2 cards selected and DONT ismatch
+  //logic if 2 cards selected and DONT match
   if (
     uniqueTileID.length === 2 &&
     colorValuesOfTwoTilesCheckedForMatch[0] !==
@@ -97,7 +79,7 @@ export default function GamePlayScreen({
       (colorValuesOfTwoTilesCheckedForMatch) => []
     );
   }
-  // resets ismatch state variable back to false after a ismatch occured
+  // resets ismatch state variable back to false after a match occured
   if (uniqueTileID.length === 1 && ismatch === true) {
     setIsMatch(!ismatch);
   }
@@ -210,9 +192,8 @@ export default function GamePlayScreen({
         gameScreen: "gameplay",
         startBtnClicked: true,
       });
-    } else {
-      null;
     }
+    return;
   }, [restartButtonClick]);
 
   function handleRestartButtonClicked() {
@@ -236,278 +217,26 @@ export default function GamePlayScreen({
       </div>
       <div className="container-around-tiles">
         <div className="container">
-          <SingleTile
-            keys={1}
-            className={"item item-1"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[0]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={2}
-            className={"item item-2"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[1]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={3}
-            className={"item item-3"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[2]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={4}
-            className={"item item-4"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[3]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={5}
-            className={"item item-5"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[4]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={6}
-            className={"item item-6"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[5]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={7}
-            className={"item item-7"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[6]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={8}
-            className={"item item-8"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[7]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={9}
-            className={"item item-9"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[8]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={10}
-            className={"item item-10"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[9]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={11}
-            className={"item item-11"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[10]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={12}
-            className={"item item-12"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[11]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={13}
-            className={"item item-13"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[12]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={14}
-            className={"item item-14"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[13]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={15}
-            className={"item item-15"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[14]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
-          <SingleTile
-            keys={16}
-            className={"item item-16"}
-            uniqueTileID={uniqueTileID}
-            setUniqueTileID={setUniqueTileID}
-            tileColor={`${individualTileColorCode[15]}`}
-            colorValuesOfTwoTilesCheckedForMatch={
-              colorValuesOfTwoTilesCheckedForMatch
-            }
-            setColorValuesOfTwoTilesCheckedForMatch={
-              setColorValuesOfTwoTilesCheckedForMatch
-            }
-            uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
-            setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
-            ismatch={ismatch}
-            restartButtonClick={restartButtonClick}
-          />
+          {[...Array(16)].map((e, i) => (
+            <SingleTile
+              key={i}
+              keys={i + 1}
+              className={`item item-${i + 1}`}
+              uniqueTileID={uniqueTileID}
+              setUniqueTileID={setUniqueTileID}
+              tileColor={`${individualTileColorCode[i]}`}
+              colorValuesOfTwoTilesCheckedForMatch={
+                colorValuesOfTwoTilesCheckedForMatch
+              }
+              setColorValuesOfTwoTilesCheckedForMatch={
+                setColorValuesOfTwoTilesCheckedForMatch
+              }
+              uniqueTileIDClickedHistory={uniqueTileIDClickedHistory}
+              setUniqueTileIDClickedHistory={setUniqueTileIDClickedHistory}
+              ismatch={ismatch}
+              restartButtonClick={restartButtonClick}
+            />
+          ))}
         </div>
       </div>
     </>
