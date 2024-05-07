@@ -27,9 +27,10 @@ export default function SingleTile({
     setTileMatched(!tileMatched);
   }
 
-  function example() {
+  function handleClick() {
     if (uniqueTileID.length <= 1 && uniqueTileID[0] !== keys) {
       setUniqueTileID([...uniqueTileID, keys]);
+      console.log(colorValuesOfTwoTilesCheckedForMatch[0], tileColor);
       setColorValuesOfTwoTilesCheckedForMatch([
         ...colorValuesOfTwoTilesCheckedForMatch,
         tileColor,
@@ -56,7 +57,7 @@ export default function SingleTile({
           : "") +
         (tileMatched ? " hidden" : "")
       }
-      onClick={example}
+      onClick={handleClick}
       style={{ backgroundColor: `${tileColor}` }}
     ></div>
   );

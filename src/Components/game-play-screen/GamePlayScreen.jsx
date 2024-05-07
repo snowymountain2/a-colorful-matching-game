@@ -41,13 +41,10 @@ export default function GamePlayScreen({
   useEffect(() => {
     if (startBtnClicked || restartButtonClick) {
       let newCardColors = randomizeTileSequence(gameMode, colorObject);
-
       setIndividualTileColorCode((prev) => [...newCardColors]);
-
       if (restartButtonClick) {
         setRestartButtonClick((prevValue) => false);
       }
-
       setGameSelectionValues({
         gameMode: gameMode,
         startBtnClicked: false,
@@ -58,42 +55,35 @@ export default function GamePlayScreen({
   }, [setGameSelectionValues, startBtnClicked, gameMode, restartButtonClick]);
   //logic if 2 cards selected and DO match
   if (
-    uniqueTileID.length === 2 &&
-    uniqueTileID[0] !== uniqueTileID[1] &&
+    colorValuesOfTwoTilesCheckedForMatch.length === 2 &&
     colorValuesOfTwoTilesCheckedForMatch[0] ===
       colorValuesOfTwoTilesCheckedForMatch[1]
   ) {
     setIsMatch((ismatch) => !ismatch);
     changeMatchCount(matchCount + 1);
-    setUniqueTileID((uniqueTileID) => []);
-    setColorValuesOfTwoTilesCheckedForMatch(
-      (colorValuesOfTwoTilesCheckedForMatch) => []
-    );
+    setUniqueTileID((prevValue) => []);
+    setColorValuesOfTwoTilesCheckedForMatch((prevValue) => []);
   }
   //logic if 2 cards selected and DONT match
   if (
-    uniqueTileID.length === 2 &&
+    colorValuesOfTwoTilesCheckedForMatch.length === 2 &&
     colorValuesOfTwoTilesCheckedForMatch[0] !==
       colorValuesOfTwoTilesCheckedForMatch[1]
   ) {
-    setUniqueTileID((uniqueTileID) => []);
-    setColorValuesOfTwoTilesCheckedForMatch(
-      (colorValuesOfTwoTilesCheckedForMatch) => []
-    );
+    setUniqueTileID((prevValue) => []);
+    setColorValuesOfTwoTilesCheckedForMatch((prevValue) => []);
   }
   // resets ismatch state variable back to false after a match occured
-  if (uniqueTileID.length === 1 && ismatch === true) {
+  if (colorValuesOfTwoTilesCheckedForMatch.length === 1 && ismatch === true) {
     setIsMatch(!ismatch);
   }
 
-  // stopwatch section
   // resets start time variable upon restart button being clicked
   useEffect(() => {
     if (gameRestartedCount === 0) {
       setStartDate((startDate) => Date.now());
-    } else {
-      null;
     }
+    return;
   }, [gameRestartedCount]);
 
   //stopwatch logic
@@ -116,13 +106,13 @@ export default function GamePlayScreen({
           startBtnClicked: false,
           gameScreen: "highscores",
         });
-      } else {
-        let [formattedTimeString, msElapsedSinceStartOfStopwatch] =
-          formatStopwatchTime(startDate);
-
-        setTimeUnformatted(msElapsedSinceStartOfStopwatch);
-        setTime(formattedTimeString);
+        return;
       }
+      let [formattedTimeString, msElapsedSinceStartOfStopwatch] =
+        formatStopwatchTime(startDate);
+
+      setTimeUnformatted(msElapsedSinceStartOfStopwatch);
+      setTime(formattedTimeString);
     }, 100);
     return () => {
       clearInterval(startTime.current);
@@ -163,9 +153,7 @@ export default function GamePlayScreen({
         <span>
           <button onClick={handleRestartButtonClicked}>RESTART</button>
         </span>
-        <span> </span>
         <HighScore highScorePostedOnGameplay={highScorePostedOnGameplay} />
-        <span> </span>
         <CurrentTime time={time} />
       </div>
       <div className="container-around-tiles">
