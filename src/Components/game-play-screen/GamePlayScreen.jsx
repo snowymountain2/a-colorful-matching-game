@@ -66,9 +66,7 @@ export default function GamePlayScreen({
     setIsMatch((ismatch) => !ismatch);
     changeMatchCount(matchCount + 1);
     setUniqueTileID((uniqueTileID) => []);
-    setColorValuesOfTwoTilesCheckedForMatch(
-      (colorValuesOfTwoTilesCheckedForMatch) => []
-    );
+    setColorValuesOfTwoTilesCheckedForMatch((prevState) => []);
   }
   //logic if 2 cards selected and DONT match
   if (
@@ -77,23 +75,19 @@ export default function GamePlayScreen({
       colorValuesOfTwoTilesCheckedForMatch[1]
   ) {
     setUniqueTileID((uniqueTileID) => []);
-    setColorValuesOfTwoTilesCheckedForMatch(
-      (colorValuesOfTwoTilesCheckedForMatch) => []
-    );
+    setColorValuesOfTwoTilesCheckedForMatch((prevState) => []);
   }
   // resets ismatch state variable back to false after a match occured
   if (uniqueTileID.length === 1 && ismatch === true) {
     setIsMatch(!ismatch);
   }
 
-  // stopwatch section
   // resets start time variable upon restart button being clicked
   useEffect(() => {
     if (gameRestartedCount === 0) {
       setStartDate((startDate) => Date.now());
-    } else {
-      null;
     }
+    return;
   }, [gameRestartedCount]);
 
   //stopwatch logic
