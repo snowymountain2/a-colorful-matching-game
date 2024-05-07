@@ -7,7 +7,10 @@ import "../../../gameplay.css";
 import logo from "../../../src/assets/title.png";
 import { useState, useEffect, useRef } from "react";
 import { colorObject } from "./sections-of-game-play-screen/colored-tiles-screen/ColorObject.js";
-import { randomizeTileSequence } from "../../Helper-Functions/helpers.js";
+import {
+  randomizeTileSequence,
+  formatStopwatchTime,
+} from "../../Helper-Functions/helpers.js";
 
 export default function GamePlayScreen({
   gameSelectionValues: { startBtnClicked, gameMode, gameScreen },
@@ -37,7 +40,7 @@ export default function GamePlayScreen({
   //randomize tiles logic
   useEffect(() => {
     if (startBtnClicked || restartButtonClick) {
-      const newCardColors = randomizeTileSequence(gameMode, colorObject);
+      let newCardColors = randomizeTileSequence(gameMode, colorObject);
 
       setIndividualTileColorCode((prev) => [...newCardColors]);
 
@@ -50,9 +53,8 @@ export default function GamePlayScreen({
         startBtnClicked: false,
         gameScreen: "gameplay",
       });
-    } else {
-      null;
     }
+    return;
   }, [setGameSelectionValues, startBtnClicked, gameMode, restartButtonClick]);
   //logic if 2 cards selected and DO match
   if (
@@ -114,60 +116,11 @@ export default function GamePlayScreen({
           startBtnClicked: false,
           gameScreen: "highscores",
         });
-        console.log("value of time on gameplay", timeUnformatted);
       } else {
-        let newTime = Date.now();
-        let millisecondsThatElapsedSinceStartofStopwatch = newTime - startDate;
+        let [formattedTimeString, msElapsedSinceStartOfStopwatch] =
+          formatStopwatchTime(startDate);
 
-        let ms = "";
-        let seconds = 0;
-        let minutes = 0;
-        let formattedTimeString = "";
-        //logic that handles time under 1 second
-        if (millisecondsThatElapsedSinceStartofStopwatch / 1000 < 1) {
-          ms = millisecondsThatElapsedSinceStartofStopwatch
-            .toString()
-            .padStart(3, "0");
-          formattedTimeString = `00:00:${ms}`;
-        }
-        //logic that handles time between 1 sec and 60 seconds
-        if (
-          millisecondsThatElapsedSinceStartofStopwatch / 1000 >= 1 &&
-          millisecondsThatElapsedSinceStartofStopwatch / 1000 < 60
-        ) {
-          ms = (millisecondsThatElapsedSinceStartofStopwatch % 1000)
-            .toString()
-            .padStart(3, "0");
-          seconds = Math.floor(
-            millisecondsThatElapsedSinceStartofStopwatch / 1000
-          )
-            .toString()
-            .padStart(2, "0");
-          formattedTimeString = `00:${seconds}:${ms}`;
-        }
-        //logic that handles time between 1min to 60 minutes
-        if (
-          millisecondsThatElapsedSinceStartofStopwatch / 1000 >= 60 &&
-          millisecondsThatElapsedSinceStartofStopwatch / 1000 < 3600
-        ) {
-          ms = Math.floor(
-            (millisecondsThatElapsedSinceStartofStopwatch % 60000) % 1000
-          )
-            .toString()
-            .padStart(3, "0");
-          seconds = Math.floor(
-            (millisecondsThatElapsedSinceStartofStopwatch % 60000) / 1000
-          )
-            .toString()
-            .padStart(3, "0");
-          minutes = Math.floor(
-            millisecondsThatElapsedSinceStartofStopwatch / 60000
-          )
-            .toString()
-            .padStart(2, "0");
-          formattedTimeString = `${minutes}:${seconds}:${ms}`;
-        }
-        setTimeUnformatted(millisecondsThatElapsedSinceStartofStopwatch);
+        setTimeUnformatted(msElapsedSinceStartOfStopwatch);
         setTime(formattedTimeString);
       }
     }, 100);
