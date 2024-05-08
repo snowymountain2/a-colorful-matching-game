@@ -63,3 +63,28 @@ export function formatStopwatchTime(startDate) {
     return [formattedTimeString, msElapsedSinceStartOfStopwatch];
   }
 }
+
+export function formatCurrentDay() {
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, "0");
+  let mm = String(today.getMonth() + 1).padStart(2, "0");
+  let yyyy = today.getFullYear();
+  today = mm + "/" + dd + "/" + yyyy;
+  return today;
+}
+
+export const highscoreRanks = [
+  "1ST",
+  "2ND",
+  "3RD",
+  "4TH",
+  "5TH",
+  "6TH",
+  "7TH",
+  "8TH",
+  "9TH",
+  "10TH",
+];
+
+export const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJza2l5d3V5am1vZHhoZHNxdXhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMyOTkzODAsImV4cCI6MjAyODg3NTM4MH0.cVz84Fj3zUrpTs7qVA09owFCVZgK8SeLwAfOpjTKngQ";

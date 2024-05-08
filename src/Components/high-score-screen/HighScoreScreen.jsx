@@ -1,16 +1,19 @@
-import AddHighScore from "./sections-of-high-score-screen/AddHighScore.jsx";
-import EndGameMessage from "./sections-of-high-score-screen/EndGameMessage.jsx";
 import HighScoreList from "./sections-of-high-score-screen/HighScoreList.jsx";
 import RestartGame from "./sections-of-high-score-screen/RestartGame.jsx";
 import SubmitHighScore from "./sections-of-high-score-screen/SubmitHighScore.jsx";
 import { useEffect, useState } from "react";
 import logo from "../../../src/assets/title.png";
 import { createClient } from "@supabase/supabase-js";
+import {
+  formatCurrentDay,
+  highscoreRanks,
+  supabaseKey,
+} from "../../Helper-Functions/helpers.js";
 
 //database initialization
 const supabase = createClient(
   "https://rskiywuyjmodxhdsquxm.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJza2l5d3V5am1vZHhoZHNxdXhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMyOTkzODAsImV4cCI6MjAyODg3NTM4MH0.cVz84Fj3zUrpTs7qVA09owFCVZgK8SeLwAfOpjTKngQ"
+  supabaseKey
 );
 
 export default function HighScoreScreen({
@@ -22,7 +25,6 @@ export default function HighScoreScreen({
   time,
   setEndOfGameRestartBtnClick,
 }) {
-  // const [highscores, setHighScores] = useState([]);
   const [listOfHighScores, setListOfHighScores] = useState([]);
   const [newHighScore, setNewHighScore] = useState(false);
   const [submittedNameInForm, setSubmittedNameInForm] = useState("");
@@ -44,31 +46,9 @@ export default function HighScoreScreen({
     }
   }, [wasNameinFormSubmitted, highScoreListRenderStatus]);
 
-  const formatCurrentDay = function () {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, "0");
-    let mm = String(today.getMonth() + 1).padStart(2, "0");
-    let yyyy = today.getFullYear();
-    today = mm + "/" + dd + "/" + yyyy;
-    return today;
-  };
-
   const theCurrentDay = formatCurrentDay();
 
-  const highscoreRanks = [
-    "1ST",
-    "2ND",
-    "3RD",
-    "4TH",
-    "5TH",
-    "6TH",
-    "7TH",
-    "8TH",
-    "9TH",
-    "10TH",
-  ];
-
-  const dataset = {
+  const newHighScoreData = {
     mode: setGameSelectionValues.gameMode,
     msScore: timeUnformatted,
     convertedScore: time,
@@ -77,20 +57,20 @@ export default function HighScoreScreen({
   };
 
   async function addData() {
-    const { data, error } = await supabase.from("highscores").insert([dataset]);
+    const { data, error } = await supabase
+      .from("highscores")
+      .insert([newHighScoreData]);
     setHighScoreSubmitted(true);
-    console.log("data was added to db");
   }
 
   async function getHighScores() {
     const { data } = await supabase.from("highscores").select();
-    console.log(data);
     data.sort(({ msScore: a }, { msScore: b }) => a - b);
     setListOfHighScores((prevState) => [...data]);
     if (!highscoreSubmitted && (data.length == 0 || data.length <= 9)) {
       setNewHighScore(true);
     }
-    //checks if most recent score is higher than 10th item in lowest to highest sorted highscores
+    //checks if most recent score is higher than 10th item in ascending sorted highscores
     if (
       !highscoreSubmitted &&
       data.length >= 10 &&
@@ -162,7 +142,7 @@ export default function HighScoreScreen({
                 setWasNameinFormSubmitted={setWasNameinFormSubmitted}
                 timeUnformatted={timeUnformatted}
                 highscoreSubmitted={highscoreSubmitted}
-                dataset={dataset}
+                newHighScoreData={newHighScoreData}
                 newHighScore={newHighScore}
                 setListOfHighScores={setListOfHighScores}
                 highScoreListRenderStatus={highScoreListRenderStatus}

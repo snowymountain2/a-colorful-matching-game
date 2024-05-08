@@ -8,7 +8,7 @@ export default function HighScoreList({
   wasNameinFormSubmitted,
   highscoreSubmitted,
   timeUnformatted,
-  dataset,
+  newHighScoreData,
   newHighScore,
   setListOfHighScores,
   setHighScoreListRenderStatus,
@@ -25,7 +25,7 @@ export default function HighScoreList({
       console.log("this ran");
       findPositionOfNewHighScore(listOfHighScores);
       let newArr = [...listOfHighScores];
-      newArr.splice(positionOfNewHighScore, 0, dataset);
+      newArr.splice(positionOfNewHighScore, 0, newHighScoreData);
       setListOfHighScores(newArr);
       setHighScoreListRenderStatus("list-with-placeholder-rendered");
     }
