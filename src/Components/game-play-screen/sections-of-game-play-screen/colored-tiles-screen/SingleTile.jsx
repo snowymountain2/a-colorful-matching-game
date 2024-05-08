@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 
 export default function SingleTile({
   className,
-  onClick,
+  uniqueIDValuesOfTwoTilesCheckedForMatch,
   uniqueTileID,
-  keys,
-  setUniqueTileID,
+  setUniqueIDValuesOfTwoTilesCheckedForMatch,
   tileColor,
   colorValuesOfTwoTilesCheckedForMatch,
   setColorValuesOfTwoTilesCheckedForMatch,
@@ -19,22 +18,33 @@ export default function SingleTile({
   // logic to check if these are the matched tiles that need to be hidden
   if (
     ismatch === true &&
-    (uniqueTileIDClickedHistory.at(-1) === keys ||
-      uniqueTileIDClickedHistory.at(-2) === keys) &&
+    (uniqueTileIDClickedHistory.at(-1) === uniqueTileID ||
+      uniqueTileIDClickedHistory.at(-2) === uniqueTileID) &&
     tileMatched == false &&
     restartButtonClick !== true
   ) {
     setTileMatched(!tileMatched);
   }
 
-  function example() {
-    if (uniqueTileID.length <= 1 && uniqueTileID[0] !== keys) {
-      setUniqueTileID([...uniqueTileID, keys]);
+  // second statement in 'if' clause below accounts for person clicking same tile multiple times (which we dont want incorprated into logic)
+  function handleClick() {
+    if (
+      uniqueIDValuesOfTwoTilesCheckedForMatch.length <= 1 &&
+      uniqueIDValuesOfTwoTilesCheckedForMatch[0] !== uniqueTileID
+    ) {
+      setUniqueIDValuesOfTwoTilesCheckedForMatch([
+        ...uniqueIDValuesOfTwoTilesCheckedForMatch,
+        uniqueTileID,
+      ]);
+
       setColorValuesOfTwoTilesCheckedForMatch([
         ...colorValuesOfTwoTilesCheckedForMatch,
         tileColor,
       ]);
-      setUniqueTileIDClickedHistory([...uniqueTileIDClickedHistory, keys]);
+      setUniqueTileIDClickedHistory([
+        ...uniqueTileIDClickedHistory,
+        uniqueTileID,
+      ]);
     }
   }
 
@@ -42,21 +52,21 @@ export default function SingleTile({
   useEffect(() => {
     if (restartButtonClick && tileMatched === true) {
       setTileMatched(!tileMatched);
-    } else {
-      return;
     }
+    return;
   }, [restartButtonClick, tileMatched]);
 
   return (
     <div
       className={
         className +
-        (uniqueTileID.length <= 1 && uniqueTileID[0] === keys
+        (uniqueIDValuesOfTwoTilesCheckedForMatch.length <= 1 &&
+        uniqueIDValuesOfTwoTilesCheckedForMatch[0] === uniqueTileID
           ? " border"
           : "") +
         (tileMatched ? " hidden" : "")
       }
-      onClick={example}
+      onClick={handleClick}
       style={{ backgroundColor: `${tileColor}` }}
     ></div>
   );
