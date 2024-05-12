@@ -22,7 +22,6 @@ export default function HighScoreList({
       newHighScore &&
       highScoreListRenderStatus === "first-render-with-initial-list"
     ) {
-      console.log("this ran");
       findPositionOfNewHighScore(listOfHighScores);
       let newArr = [...listOfHighScores];
       newArr.splice(positionOfNewHighScore, 0, newHighScoreData);

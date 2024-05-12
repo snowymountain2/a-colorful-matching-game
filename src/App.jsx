@@ -35,9 +35,12 @@ function App() {
 
   async function getHighScore() {
     const { data } = await supabase.from("highscores").select();
-    data.sort(({ msScore: a }, { msScore: b }) => a - b);
-    setHighScorePostedOnGameplay(data[0].convertedScore);
-    console.log(highScorePostedOnGameplay);
+
+    const formattedData = data
+      .filter((highscore) => highscore.mode === gameSelectionValues.gameMode)
+      .sort(({ msScore: a }, { msScore: b }) => a - b);
+
+    setHighScorePostedOnGameplay(formattedData[0].convertedScore);
   }
 
   return (
@@ -58,7 +61,6 @@ function App() {
           setTime={setTime}
           time={time}
           setTimeUnformatted={setTimeUnformatted}
-          timeUnformatted={timeUnformatted}
           highScorePostedOnGameplay={highScorePostedOnGameplay}
         />
       ) : (

@@ -16,7 +16,6 @@ export default function GamePlayScreen({
   setTime,
   time,
   setTimeUnformatted,
-  timeUnformatted,
   highScorePostedOnGameplay,
 }) {
   const [
@@ -35,13 +34,13 @@ export default function GamePlayScreen({
   const startTime = useRef(null);
   const [restartButtonClick, setRestartButtonClick] = useState(false);
   const [startDate, setStartDate] = useState(0);
-  const [individualTileColorCode, setIndividualTileColorCode] = useState([]);
+  const [arrayOfHexCodesForColors, setArrayOfHexCodesForColors] = useState([]);
 
   //randomize tiles logic
   useEffect(() => {
     if (startBtnClicked || restartButtonClick) {
       let newCardColors = randomizeTileSequence(gameMode, colorObject);
-      setIndividualTileColorCode((prev) => [...newCardColors]);
+      setArrayOfHexCodesForColors((prev) => [...newCardColors]);
       if (restartButtonClick) {
         setRestartButtonClick((prevValue) => false);
       }
@@ -95,7 +94,7 @@ export default function GamePlayScreen({
         changeMatchCount(0);
         setRestartButtonClick(false);
         setStartDate(0);
-        setIndividualTileColorCode((prevState) => []);
+        setArrayOfHexCodesForColors((prevState) => []);
         startTime.current = null;
         setGameSelectionValues({
           gameMode: gameMode,
@@ -162,7 +161,7 @@ export default function GamePlayScreen({
               setUniqueIDValuesOfTwoTilesCheckedForMatch={
                 setUniqueIDValuesOfTwoTilesCheckedForMatch
               }
-              tileColor={`${individualTileColorCode[i]}`}
+              tileColor={`${arrayOfHexCodesForColors[i]}`}
               colorValuesOfTwoTilesCheckedForMatch={
                 colorValuesOfTwoTilesCheckedForMatch
               }

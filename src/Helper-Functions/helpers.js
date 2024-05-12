@@ -1,5 +1,5 @@
 export function randomizeTileSequence(gameMode, colorObject) {
-  let createRandomIndexInNewColorObject = Math.floor(Math.random() * 2);
+  let createRandomIndexInNewColorObject = Math.floor(Math.random() * 4);
   let newColorArrayNotRandomized = [];
   newColorArrayNotRandomized =
     colorObject[`${gameMode}`][createRandomIndexInNewColorObject];

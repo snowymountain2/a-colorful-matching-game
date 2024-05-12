@@ -2,9 +2,7 @@ import { useState } from "react";
 
 export default function SubmitHighScore({
   setSubmittedNameInForm,
-  submittedNameInForm,
   setWasNameinFormSubmitted,
-  wasNameinFormSubmitted,
 }) {
   const [unsubmittedNameInForm, setUnsubmittedNameInForm] = useState("");
 

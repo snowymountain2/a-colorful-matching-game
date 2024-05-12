@@ -1,9 +1,6 @@
 export default function RestartGame({
   setGameSelectionValues,
-  gameSelectionValues,
-  timeUnformatted,
   setTimeUnformatted,
-  time,
   setListOfHighScores,
   setNewHighScore,
   setSubmittedNameInForm,
@@ -14,19 +11,6 @@ export default function RestartGame({
   setTime,
   setEndOfGameRestartBtnClick,
 }) {
-  // const [listOfHighScores, setListOfHighScores] = useState([]);
-  // const [newHighScore, setNewHighScore] = useState(false);
-  // const [submittedNameInForm, setSubmittedNameInForm] = useState("");
-  // const [highscoreSubmitted, setHighScoreSubmitted] = useState(false);
-  // const [wasNameinFormSubmitted, setWasNameinFormSubmitted] = useState(false);
-  // const [highScoreListRenderStatus, setHighScoreListRenderStatus] =
-  //   useState("unrendered");
-  // const [positionOfNewHighScore, setPositionOfNewHighScore] = useState(-1);
-  // setGameSelectionValues,
-  // gameSelectionValues,
-  // timeUnformatted,
-  // setTimeUnformatted,
-  // time,
   function handleClick(e) {
     setListOfHighScores((prevState) => []);
     setNewHighScore(false);

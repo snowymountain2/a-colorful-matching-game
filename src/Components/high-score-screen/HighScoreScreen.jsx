@@ -17,8 +17,8 @@ const supabase = createClient(
 );
 
 export default function HighScoreScreen({
-  setGameSelectionValues,
   gameSelectionValues,
+  setGameSelectionValues,
   timeUnformatted,
   setTimeUnformatted,
   setTime,
@@ -49,7 +49,7 @@ export default function HighScoreScreen({
   const theCurrentDay = formatCurrentDay();
 
   const newHighScoreData = {
-    mode: setGameSelectionValues.gameMode,
+    mode: gameSelectionValues.gameMode,
     msScore: timeUnformatted,
     convertedScore: time,
     name: submittedNameInForm,
@@ -65,9 +65,16 @@ export default function HighScoreScreen({
 
   async function getHighScores() {
     const { data } = await supabase.from("highscores").select();
-    data.sort(({ msScore: a }, { msScore: b }) => a - b);
-    setListOfHighScores((prevState) => [...data]);
-    if (!highscoreSubmitted && (data.length == 0 || data.length <= 9)) {
+
+    const formattedData = data
+      .filter((highscore) => highscore.mode === gameSelectionValues.gameMode)
+      .sort(({ msScore: a }, { msScore: b }) => a - b);
+    setListOfHighScores((prevState) => [...formattedData]);
+
+    if (
+      !highscoreSubmitted &&
+      (listOfHighScores.length == 0 || data.length <= 9)
+    ) {
       setNewHighScore(true);
     }
     //checks if most recent score is higher than 10th item in ascending sorted highscores
@@ -104,10 +111,7 @@ export default function HighScoreScreen({
               <p>{highscoreRanks[positionOfNewHighScore]}</p>
               <RestartGame
                 setGameSelectionValues={setGameSelectionValues}
-                gameSelectionValues={gameSelectionValues}
-                timeUnformatted={timeUnformatted}
                 setTimeUnformatted={setTimeUnformatted}
-                time={time}
                 setTime={setTime}
                 setListOfHighScores={setListOfHighScores}
                 setNewHighScore={setNewHighScore}
@@ -123,8 +127,6 @@ export default function HighScoreScreen({
               {newHighScore ? (
                 <SubmitHighScore
                   setSubmittedNameInForm={setSubmittedNameInForm}
-                  submittedNameInForm={submittedNameInForm}
-                  wasNameinFormSubmitted={wasNameinFormSubmitted}
                   setWasNameinFormSubmitted={setWasNameinFormSubmitted}
                 />
               ) : (
