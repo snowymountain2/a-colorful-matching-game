@@ -61,11 +61,17 @@ export default function HighScoreScreen({
       .from("highscores")
       .insert([newHighScoreData]);
     setHighScoreSubmitted(true);
+    let replacePlaceHolderInitialsValue = [...listOfHighScores];
+    replacePlaceHolderInitialsValue.splice(
+      positionOfNewHighScore,
+      1,
+      newHighScoreData
+    );
+    setListOfHighScores(replacePlaceHolderInitialsValue);
   }
 
   async function getHighScores() {
     const { data } = await supabase.from("highscores").select();
-
     const formattedData = data
       .filter((highscore) => highscore.mode === gameSelectionValues.gameMode)
       .sort(({ msScore: a }, { msScore: b }) => a - b);

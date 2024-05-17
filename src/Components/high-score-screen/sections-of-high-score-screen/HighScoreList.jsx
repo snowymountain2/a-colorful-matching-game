@@ -42,7 +42,6 @@ export default function HighScoreList({
       );
       setPositionOfNewHighScore(indexOfNewHighScore);
     } else {
-      console.log("test2");
       setPositionOfNewHighScore(highscorelist.length - 1);
     }
   }
