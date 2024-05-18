@@ -29,6 +29,7 @@ export default function HighScoreList({
   function findPositionOfNewHighScore(highscorelist) {
     if (highscorelist.length === 0) {
       setPositionOfNewHighScore(0);
+      // this 'else if' checks if the player's score is lower than any value in the highscore list
     } else if (highscorelist.some((value) => timeUnformatted < value.msScore)) {
       const valueNewHighScoreWillReplace = highscorelist.find(
         (value) => timeUnformatted < value.msScore
@@ -37,6 +38,7 @@ export default function HighScoreList({
         (object) => object.msScore == valueNewHighScoreWillReplace.msScore
       );
       setPositionOfNewHighScore(indexOfNewHighScore);
+      // this 'else' sets newhighscore position to end of highscore list since the players score wasn't lower than any score in the highscore list
     } else {
       setPositionOfNewHighScore(highscorelist.length);
     }
@@ -71,7 +73,15 @@ export default function HighScoreList({
                 >
                   <span>{highscoreRanks[i]}</span>
                   <span>{highscore.convertedScore}</span>
-                  <span>{highscoreSubmitted ? highscore.name : " "} </span>
+                  <span>
+                    {highscoreSubmitted ? (
+                      highscore.name
+                    ) : (
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </span>
+                    )}{" "}
+                  </span>
                   <span>{highscore.date}</span>
                 </p>
               );
