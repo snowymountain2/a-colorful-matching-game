@@ -94,6 +94,16 @@ export function checkIfNewHighscore(
   }
 }
 
+export function replacePlaceHolderInitialsValue(
+  listOfHighScores,
+  positionOfNewHighScore,
+  newHighScoreData
+) {
+  let copyOfHighscores = [...listOfHighScores];
+  copyOfHighscores.splice(positionOfNewHighScore, 1, newHighScoreData);
+  return copyOfHighscores;
+}
+
 export const highscoreRanks = [
   "1ST",
   "2ND",

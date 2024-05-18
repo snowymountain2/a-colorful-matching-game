@@ -9,6 +9,7 @@ import {
   highscoreRanks,
   supabaseKey,
   checkIfNewHighscore,
+  replacePlaceHolderInitialsValue,
 } from "../../Helper-Functions/helpers.js";
 
 //database initialization
@@ -39,6 +40,7 @@ export default function HighScoreScreen({
   useEffect(() => {
     if (highScoreListRenderStatus === "unrendered") {
       getHighScores();
+      // checks if theres a new highscore
       if (
         checkIfNewHighscore(
           highscoreSubmitted,
@@ -70,13 +72,13 @@ export default function HighScoreScreen({
       .from("highscores")
       .insert([newHighScoreData]);
     setHighScoreSubmitted(true);
-    let replacePlaceHolderInitialsValue = [...listOfHighScores];
-    replacePlaceHolderInitialsValue.splice(
-      positionOfNewHighScore,
-      1,
-      newHighScoreData
-    );
-    setListOfHighScores(replacePlaceHolderInitialsValue);
+    let highscoreListWithPlaceholderInitialsUpdated =
+      replacePlaceHolderInitialsValue(
+        listOfHighScores,
+        positionOfNewHighScore,
+        newHighScoreData
+      );
+    setListOfHighScores(highscoreListWithPlaceholderInitialsUpdated);
     setHighScoreListRenderStatus("new-highscore-rendered-to-list");
   }
 
@@ -137,10 +139,6 @@ export default function HighScoreScreen({
             <div className="high-score-list">
               <HighScoreList
                 listOfHighScores={listOfHighScores}
-                setSubmittedNameInForm={setSubmittedNameInForm}
-                submittedNameInForm={submittedNameInForm}
-                wasNameinFormSubmitted={wasNameinFormSubmitted}
-                setWasNameinFormSubmitted={setWasNameinFormSubmitted}
                 timeUnformatted={timeUnformatted}
                 highscoreSubmitted={highscoreSubmitted}
                 newHighScoreData={newHighScoreData}

@@ -1,11 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function HighScoreList({
   listOfHighScores,
-  setSubmittedNameInForm,
-  submittedNameInForm,
-  setWasNameinFormSubmitted,
-  wasNameinFormSubmitted,
   highscoreSubmitted,
   timeUnformatted,
   newHighScoreData,
@@ -29,24 +25,6 @@ export default function HighScoreList({
       setHighScoreListRenderStatus("list-with-placeholder-rendered");
     }
   }, [listOfHighScores, highScoreListRenderStatus, newHighScore]);
-
-  // function findPositionOfNewHighScore(highscorelist) {
-  //   if (highscorelist.length === 0) {
-  //     setPositionOfNewHighScore(0);
-  //     return;
-  //   } else if ()
-  //   console.log(highscorelist);
-  //   debugger;
-  //   const valueNewHighScoreWillReplace = highscorelist.find(
-  //     (value) => value.msScore > timeUnformatted
-  //   );
-  //   debugger;
-  //   const indexOfNewHighScore = highscorelist.findIndex(
-  //     (object) => object.msScore == valueNewHighScoreWillReplace.msScore
-  //   );
-  //   debugger;
-  //   setPositionOfNewHighScore(indexOfNewHighScore);
-  // }
 
   function findPositionOfNewHighScore(highscorelist) {
     if (highscorelist.length === 0) {
