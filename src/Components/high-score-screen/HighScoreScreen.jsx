@@ -8,6 +8,7 @@ import {
   formatCurrentDay,
   highscoreRanks,
   supabaseKey,
+  checkIfNewHighscore,
 } from "../../Helper-Functions/helpers.js";
 
 //database initialization
@@ -38,6 +39,15 @@ export default function HighScoreScreen({
   useEffect(() => {
     if (highScoreListRenderStatus === "unrendered") {
       getHighScores();
+      if (
+        checkIfNewHighscore(
+          highscoreSubmitted,
+          listOfHighScores,
+          timeUnformatted
+        )
+      ) {
+        setNewHighScore(true);
+      }
     }
     if (wasNameinFormSubmitted && !highscoreSubmitted) {
       addData();
@@ -77,20 +87,6 @@ export default function HighScoreScreen({
       .sort(({ msScore: a }, { msScore: b }) => a - b);
     setListOfHighScores((prevState) => [...formattedData]);
 
-    if (
-      !highscoreSubmitted &&
-      (listOfHighScores.length == 0 || data.length <= 9)
-    ) {
-      setNewHighScore(true);
-    }
-    //checks if most recent score is higher than 10th item in ascending sorted highscores
-    if (
-      !highscoreSubmitted &&
-      data.length >= 10 &&
-      timeUnformatted < data[9].msScore
-    ) {
-      setNewHighScore(true);
-    }
     if (!highscoreSubmitted) {
       setHighScoreListRenderStatus("first-render-with-initial-list");
     }

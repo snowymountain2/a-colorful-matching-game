@@ -73,6 +73,27 @@ export function formatCurrentDay() {
   return today;
 }
 
+export function checkIfNewHighscore(
+  highscoreSubmitted,
+  listOfHighScores,
+  timeUnformatted
+) {
+  if (
+    !highscoreSubmitted &&
+    (listOfHighScores.length == 0 || listOfHighScores.length <= 9)
+  ) {
+    return true;
+  }
+  //checks if most recent score is higher than 10th item in ascending sorted highscores
+  if (
+    !highscoreSubmitted &&
+    listOfHighScores.length >= 10 &&
+    timeUnformatted < listOfHighScores[9].msScore
+  ) {
+    return true;
+  }
+}
+
 export const highscoreRanks = [
   "1ST",
   "2ND",
