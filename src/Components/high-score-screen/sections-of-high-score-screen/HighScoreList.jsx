@@ -30,6 +30,24 @@ export default function HighScoreList({
     }
   }, [listOfHighScores, highScoreListRenderStatus, newHighScore]);
 
+  // function findPositionOfNewHighScore(highscorelist) {
+  //   if (highscorelist.length === 0) {
+  //     setPositionOfNewHighScore(0);
+  //     return;
+  //   } else if ()
+  //   console.log(highscorelist);
+  //   debugger;
+  //   const valueNewHighScoreWillReplace = highscorelist.find(
+  //     (value) => value.msScore > timeUnformatted
+  //   );
+  //   debugger;
+  //   const indexOfNewHighScore = highscorelist.findIndex(
+  //     (object) => object.msScore == valueNewHighScoreWillReplace.msScore
+  //   );
+  //   debugger;
+  //   setPositionOfNewHighScore(indexOfNewHighScore);
+  // }
+
   function findPositionOfNewHighScore(highscorelist) {
     if (highscorelist.length === 0) {
       setPositionOfNewHighScore(0);
@@ -42,7 +60,7 @@ export default function HighScoreList({
       );
       setPositionOfNewHighScore(indexOfNewHighScore);
     } else {
-      setPositionOfNewHighScore(highscorelist.length - 1);
+      setPositionOfNewHighScore(highscorelist.length);
     }
   }
 

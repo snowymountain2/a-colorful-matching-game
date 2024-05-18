@@ -41,7 +41,6 @@ export default function HighScoreScreen({
     }
     if (wasNameinFormSubmitted && !highscoreSubmitted) {
       addData();
-      getHighScores();
       setWasNameinFormSubmitted(false);
     }
   }, [wasNameinFormSubmitted, highScoreListRenderStatus]);
@@ -68,6 +67,7 @@ export default function HighScoreScreen({
       newHighScoreData
     );
     setListOfHighScores(replacePlaceHolderInitialsValue);
+    setHighScoreListRenderStatus("new-highscore-rendered-to-list");
   }
 
   async function getHighScores() {
@@ -93,9 +93,6 @@ export default function HighScoreScreen({
     }
     if (!highscoreSubmitted) {
       setHighScoreListRenderStatus("first-render-with-initial-list");
-    }
-    if (highscoreSubmitted) {
-      setHighScoreListRenderStatus("new-highscore-rendered-to-list");
     }
   }
 
