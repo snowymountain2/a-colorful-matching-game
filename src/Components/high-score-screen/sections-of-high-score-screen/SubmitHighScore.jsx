@@ -20,6 +20,9 @@ export default function SubmitHighScore({
   }
 
   function handleChange(e) {
+    console.log(e);
+    const lettersOnly = new RegExp("^[a-zA-Z ]*$");
+
     if (
       e.key === "Backspace" ||
       e.key === "delete" ||
@@ -31,7 +34,11 @@ export default function SubmitHighScore({
       const removeCommas = splitString.toString().replace(",", "");
       setUnsubmittedNameInForm(removeCommas);
     }
-    if (unsubmittedNameInForm.length <= 2 && e.key !== "Backspace") {
+    if (
+      unsubmittedNameInForm.length <= 2 &&
+      e.key.length === 1 &&
+      lettersOnly.test(e.key)
+    ) {
       setUnsubmittedNameInForm((prevstate) => prevstate + e.key);
     }
   }
