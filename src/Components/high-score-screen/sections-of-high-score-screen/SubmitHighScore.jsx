@@ -47,12 +47,13 @@ export default function SubmitHighScore({
       <div className="submithighscore">
         <form onSubmit={handleSubmit}>
           <input
+            className="input-field"
             type="text"
             value={unsubmittedNameInForm}
             onKeyDown={handleChange}
           />
           {"\n"}
-          <input type="submit" value="SUBMIT" />
+          <input className="input-btn" type="submit" value="Submit" />
         </form>
       </div>
     </>

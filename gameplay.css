@@ -133,15 +133,29 @@ button {
   text-align: center;
 }
 
-.submithighscore input {
-  border-color: black;
-  color: white;
-  text-align: center;
-  background-color: black;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  width: 240px;
+@media (min-width: 845px) {
+  .submithighscore input {
+    border-color: black;
+    color: white;
+    text-align: center;
+    background-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 240px;
+  }
+}
+
+@media (max-width: 845px) {
+  .input-field {
+    border-color: lightgrey !important;
+    border-width: 1px !important;
+    border: solid;
+    color: white;
+    text-align: center;
+    background-color: black;
+    width: 240px;
+  }
 }
 
 .submithighscore input[type="text"] {

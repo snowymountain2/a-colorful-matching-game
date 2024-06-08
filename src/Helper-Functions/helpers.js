@@ -79,8 +79,9 @@ export function checkIfNewHighscore(
   timeUnformatted
 ) {
   if (
+    // checks if highscore list under 10 items, if so any score is automatically a highscore
     !highscoreSubmitted &&
-    (listOfHighScores.length == 0 || listOfHighScores.length <= 9)
+    listOfHighScores.length <= 9
   ) {
     return true;
   }
