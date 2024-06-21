@@ -20,6 +20,7 @@ export default function HighScoreList({
     ) {
       findPositionOfNewHighScore(listOfHighScores);
       let newArr = [...listOfHighScores];
+      console.log("highscore objec", newHighScoreData);
       newArr.splice(positionOfNewHighScore, 0, newHighScoreData);
       setListOfHighScores(newArr);
       setHighScoreListRenderStatus("list-with-placeholder-rendered");
