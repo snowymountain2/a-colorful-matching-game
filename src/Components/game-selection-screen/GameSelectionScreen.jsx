@@ -8,6 +8,8 @@ export default function GameSelectionScreen({
   setGameSelectionValues,
   gameSelectionValues,
 }) {
+  localStorage.removeItem("gameScore");
+
   return (
     <>
       <div className="main-content">

@@ -82,6 +82,12 @@ export default function GamePlayScreen({
     setStartDate((prevValue) => Date.now());
   }, []);
 
+  useEffect(() => {
+    if (matchCount === 8) {
+      localStorage.setItem("gameScore", time);
+    }
+  }, [matchCount]);
+
   //stopwatch logic
   useEffect(() => {
     startTime.current = setInterval(() => {
