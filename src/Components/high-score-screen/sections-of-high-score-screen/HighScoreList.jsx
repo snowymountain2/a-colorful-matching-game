@@ -23,7 +23,8 @@ export default function HighScoreList({
       console.log("highscore objec", newHighScoreData);
       newArr.splice(positionOfNewHighScore, 0, newHighScoreData);
       console.log("2", newArr);
-      setListOfHighScores(newArr);
+      //setListOfHighScores(newArr);
+      setListOfHighScores((prevState) => [...newArr]);
       console.log("3", listOfHighScores);
       setHighScoreListRenderStatus("list-with-placeholder-rendered");
     }
