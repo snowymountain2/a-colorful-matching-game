@@ -59,10 +59,12 @@ export default function HighScoreScreen({
 
   const theCurrentDay = formatCurrentDay();
 
+  const displayOfTime = time;
+
   const newHighScoreData = {
     mode: gameSelectionValues.gameMode,
     msScore: timeUnformatted,
-    convertedScore: time,
+    convertedScore: displayOfTime,
     name: submittedNameInForm,
     date: theCurrentDay,
   };
@@ -108,7 +110,7 @@ export default function HighScoreScreen({
             <div className="end-game-message">
               {" "}
               {newHighScore ? "new highscore!" : "Your Score:"}
-              <p>{time}</p>
+              <p>{displayOfTime}</p>
               <p>{highscoreRanks[positionOfNewHighScore]}</p>
               <RestartGame
                 setGameSelectionValues={setGameSelectionValues}
