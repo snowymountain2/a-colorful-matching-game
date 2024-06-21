@@ -68,6 +68,7 @@ export default function HighScoreScreen({
     name: submittedNameInForm,
     date: theCurrentDay,
   };
+  console.log(newHighScoreData);
 
   async function addData() {
     const { data, error } = await supabase
