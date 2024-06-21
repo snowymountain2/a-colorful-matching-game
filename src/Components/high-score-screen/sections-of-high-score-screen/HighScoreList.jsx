@@ -22,7 +22,9 @@ export default function HighScoreList({
       let newArr = [...listOfHighScores];
       console.log("highscore objec", newHighScoreData);
       newArr.splice(positionOfNewHighScore, 0, newHighScoreData);
+      console.log("2", newArr);
       setListOfHighScores(newArr);
+      console.log("3", listOfHighScores);
       setHighScoreListRenderStatus("list-with-placeholder-rendered");
     }
   }, [listOfHighScores, highScoreListRenderStatus, newHighScore]);
