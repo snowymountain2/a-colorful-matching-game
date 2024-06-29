@@ -19,12 +19,15 @@ export default function HighScoreList({
       highScoreListRenderStatus === "first-render-with-initial-list"
     ) {
       findPositionOfNewHighScore(listOfHighScores);
-      // let newArr = [...listOfHighScores];
+      //let newArr = [...listOfHighScores];
       // newArr.splice(positionOfNewHighScore, 0, newHighScoreData);
-      setListOfHighScores((prevState) => [
-        ...listOfHighScores,
-        newHighScoreData,
-      ]);
+
+      //
+      let newArr = [...listOfHighScores, newHighScoreData].sort(
+        ({ msScore: a }, { msScore: b }) => a - b
+      );
+
+      setListOfHighScores((prevState) => [...newArr]);
       setHighScoreListRenderStatus("list-with-placeholder-rendered");
     }
   }, [listOfHighScores, highScoreListRenderStatus, newHighScore]);

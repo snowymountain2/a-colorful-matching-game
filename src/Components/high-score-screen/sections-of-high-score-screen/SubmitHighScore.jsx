@@ -9,7 +9,6 @@ export default function SubmitHighScore({
   function handleSubmit(e) {
     if (unsubmittedNameInForm.length === 3) {
       let toUpperCaseSubmittedNameInForm = unsubmittedNameInForm.toUpperCase();
-      console.log(toUpperCaseSubmittedNameInForm);
       setSubmittedNameInForm(toUpperCaseSubmittedNameInForm);
       setWasNameinFormSubmitted(true);
       e.preventDefault();
