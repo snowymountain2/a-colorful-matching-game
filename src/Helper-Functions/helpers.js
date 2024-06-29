@@ -98,11 +98,20 @@ export function checkIfNewHighscore(
 export function replacePlaceHolderInitialsValue(
   listOfHighScores,
   positionOfNewHighScore,
-  newHighScoreData
+  newHighScoreData,
+  timeUnformatted
 ) {
-  let copyOfHighscores = [...listOfHighScores];
-  copyOfHighscores.splice(positionOfNewHighScore, 1, newHighScoreData);
-  return copyOfHighscores;
+  let copyOfHighscores = [...listOfHighScores].filter(
+    (item) => item.msScore != timeUnformatted
+  );
+  debugger;
+  let addCompleteHighScoreObjToCopyOfHighscores = [
+    ...copyOfHighscores,
+    newHighScoreData,
+  ].sort(({ msScore: a }, { msScore: b }) => a - b);
+  debugger;
+  //copyOfHighscores.splice(positionOfNewHighScore, 1, newHighScoreData);
+  return addCompleteHighScoreObjToCopyOfHighscores;
 }
 
 export const highscoreRanks = [

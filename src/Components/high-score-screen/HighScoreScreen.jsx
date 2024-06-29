@@ -79,7 +79,8 @@ export default function HighScoreScreen({
       replacePlaceHolderInitialsValue(
         listOfHighScores,
         positionOfNewHighScore,
-        newHighScoreData
+        newHighScoreData,
+        timeUnformatted
       );
     setListOfHighScores(highscoreListWithPlaceholderInitialsUpdated);
     setHighScoreListRenderStatus("new-highscore-rendered-to-list");
