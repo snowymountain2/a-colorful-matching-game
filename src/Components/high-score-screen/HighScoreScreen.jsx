@@ -88,7 +88,7 @@ export default function HighScoreScreen({
 
   async function getHighScores() {
     const { data } = await supabase.from("highscores").select();
-    console.log(data);
+    console.log("hi", data);
     const formattedData = data
       .filter((highscore) => highscore.mode === gameSelectionValues.gameMode)
       .sort(({ msScore: a }, { msScore: b }) => a - b);
