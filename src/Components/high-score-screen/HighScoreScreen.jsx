@@ -14,7 +14,7 @@ import {
 
 //database initialization
 const supabase = createClient(
-  "https://rskiywuyjmodxhdsquxm.supabase.co",
+  "https://plifrjrkerqhbeatozpz.supabase.co",
   supabaseKey
 );
 
