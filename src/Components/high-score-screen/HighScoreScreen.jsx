@@ -105,25 +105,6 @@ export default function HighScoreScreen({
         <div className="title">
           {" "}
           <img src={logo} className="title-img main-content"></img>{" "}
-          <div className="end-game-message">
-            {" "}
-            {newHighScore ? "new highscore!" : "Your Score:"}
-            <p>{timeDisplayed}</p>
-            <p>{highscoreRanks[positionOfNewHighScore]}</p>
-            <RestartGame
-              setGameSelectionValues={setGameSelectionValues}
-              setTimeUnformatted={setTimeUnformatted}
-              setTime={setTime}
-              setListOfHighScores={setListOfHighScores}
-              setNewHighScore={setNewHighScore}
-              setSubmittedNameInForm={setSubmittedNameInForm}
-              setHighScoreSubmitted={setHighScoreSubmitted}
-              setWasNameinFormSubmitted={setWasNameinFormSubmitted}
-              setHighScoreListRenderStatus={setHighScoreListRenderStatus}
-              setPositionOfNewHighScore={setPositionOfNewHighScore}
-              setEndOfGameRestartBtnClick={setEndOfGameRestartBtnClick}
-            />
-          </div>
         </div>
       </div>
       <div className="parent-high-score-container">
@@ -131,9 +112,9 @@ export default function HighScoreScreen({
           <div className="grid-container-highscores">
             <div className="end-game-message">
               {" "}
-              {newHighScore ? "new highscore!" : "Your Score:"}
+              {newHighScore ? "Your Score:" : "Your Score:"}
               <p>{timeDisplayed}</p>
-              <p>{highscoreRanks[positionOfNewHighScore]}</p>
+              {/*<p>{highscoreRanks[positionOfNewHighScore]}</p>*/}
               <RestartGame
                 setGameSelectionValues={setGameSelectionValues}
                 setTimeUnformatted={setTimeUnformatted}
@@ -146,33 +127,6 @@ export default function HighScoreScreen({
                 setHighScoreListRenderStatus={setHighScoreListRenderStatus}
                 setPositionOfNewHighScore={setPositionOfNewHighScore}
                 setEndOfGameRestartBtnClick={setEndOfGameRestartBtnClick}
-              />
-            </div>
-            <div className="submit-name">
-              {newHighScore ? (
-                <SubmitHighScore
-                  setSubmittedNameInForm={setSubmittedNameInForm}
-                  setWasNameinFormSubmitted={setWasNameinFormSubmitted}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
-          <div className="high-score-list-container">
-            <div className="high-score-list">
-              <HighScoreList
-                listOfHighScores={listOfHighScores}
-                timeUnformatted={timeUnformatted}
-                highscoreSubmitted={highscoreSubmitted}
-                newHighScoreData={newHighScoreData}
-                newHighScore={newHighScore}
-                setListOfHighScores={setListOfHighScores}
-                highScoreListRenderStatus={highScoreListRenderStatus}
-                setHighScoreListRenderStatus={setHighScoreListRenderStatus}
-                positionOfNewHighScore={positionOfNewHighScore}
-                setPositionOfNewHighScore={setPositionOfNewHighScore}
-                highscoreRanks={highscoreRanks}
               />
             </div>
           </div>

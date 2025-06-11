@@ -231,7 +231,7 @@ button {
 }
 
 .highscore p {
-  color: black;
+  color: black !important;
   display: flex;
   flex-direction: column;
   align-items: center;
