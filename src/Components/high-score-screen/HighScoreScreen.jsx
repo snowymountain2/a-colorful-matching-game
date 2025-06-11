@@ -105,6 +105,25 @@ export default function HighScoreScreen({
         <div className="title">
           {" "}
           <img src={logo} className="title-img main-content"></img>{" "}
+          <div className="end-game-message">
+            {" "}
+            {newHighScore ? "new highscore!" : "Your Score:"}
+            <p>{timeDisplayed}</p>
+            <p>{highscoreRanks[positionOfNewHighScore]}</p>
+            <RestartGame
+              setGameSelectionValues={setGameSelectionValues}
+              setTimeUnformatted={setTimeUnformatted}
+              setTime={setTime}
+              setListOfHighScores={setListOfHighScores}
+              setNewHighScore={setNewHighScore}
+              setSubmittedNameInForm={setSubmittedNameInForm}
+              setHighScoreSubmitted={setHighScoreSubmitted}
+              setWasNameinFormSubmitted={setWasNameinFormSubmitted}
+              setHighScoreListRenderStatus={setHighScoreListRenderStatus}
+              setPositionOfNewHighScore={setPositionOfNewHighScore}
+              setEndOfGameRestartBtnClick={setEndOfGameRestartBtnClick}
+            />
+          </div>
         </div>
       </div>
       <div className="parent-high-score-container">

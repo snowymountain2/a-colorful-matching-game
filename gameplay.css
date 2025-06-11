@@ -202,6 +202,10 @@ button {
   }
 }
 
+.highscore p {
+  color: black ip !important;
+}
+
 .highscore-items {
   display: flex;
   align-items: flex-end;
