@@ -202,10 +202,6 @@ button {
   }
 }
 
-.highscore p {
-  color: black ip !important;
-}
-
 .highscore-items {
   display: flex;
   align-items: flex-end;
@@ -235,7 +231,7 @@ button {
 }
 
 .highscore p {
-  color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
